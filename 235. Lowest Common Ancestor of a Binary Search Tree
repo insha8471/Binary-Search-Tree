@@ -1,0 +1,56 @@
+235. Lowest Common Ancestor of a Binary Search Tree
+//Time complexity O(n)...
+//S.c : O(h)
+
+
+class Solution {
+    //Time complexity O(n)...
+    public static boolean contains(TreeNode root, TreeNode node){
+        if(root == null) return false;
+        if(root == node) return true;
+        return contains(root.left,node) || contains(root.right, node);
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(p==root || q==root) return root;
+        if(p==q) return p;
+        //check the p is exist is left or not
+
+        boolean leftc = contains(root.left,p);
+
+        //check if the q is exist in right or not..
+        boolean rightc = contains(root.right,q);
+        
+        //condition
+        
+        //if the p exist in left and q exist in right then return root..
+        if(leftc && rightc) return root;
+
+        //if the p exist in left but the q doesnt exist in right side
+        //so now check in left side
+        if(leftc && !rightc) return lowestCommonAncestor(root.left,p,q);
+
+         //if the p doesnt exist in left but the q  exist in right side
+        //so now check in right side
+        if(!leftc && rightc) return lowestCommonAncestor(root.right,p,q);
+
+        //if the q and q doesnt exist in the both side then return root...
+        if(!leftc && !rightc) return root;
+        return null;
+    }
+}
+
+****************************************************************************************************************************
+//T.c : O(N);
+//S.c : O(h)
+
+//class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(p.val < root.val && q.val <root.val){
+            return lowestCommonAncestor(root.left,p,q);
+        }else if(p.val > root.val && q.val > root.val){
+            return lowestCommonAncestor(root.right, p,q);
+        }else{
+            return root;
+        }
+    }
+}
