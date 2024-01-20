@@ -1,0 +1,25 @@
+//T.c : O(N)
+//T.c : O(h)
+
+
+class Solution {
+    public void inorder(TreeNode root, boolean[] flag, TreeNode[] temp){
+        if(root == null) return;
+        inorder(root.left, flag, temp);
+        if(temp[0] == null) temp[0] = root;
+        else if(root.val <= temp[0].val){
+            flag[0] = false;
+        }else{
+            temp[0] = root;
+        }
+        inorder(root.right, flag, temp);
+    }
+    public boolean isValidBST(TreeNode root) {
+        boolean[] flag = new boolean[1];
+        TreeNode[] temp = new TreeNode[1];
+        flag[0] = true;
+        temp[0] = null;
+        inorder(root, flag, temp);
+        return flag[0];
+    }
+}
