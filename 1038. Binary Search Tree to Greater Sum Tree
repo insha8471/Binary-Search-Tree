@@ -1,0 +1,21 @@
+1038. Binary Search Tree to Greater Sum Tree
+
+//T.c : O(N)
+//s.c : O(h) 
+
+
+class Solution {
+    public void revInorder(TreeNode root, int[] sum){
+        if(root == null) return;
+
+        revInorder(root.right, sum);
+        root.val = root.val + sum[0];
+        sum[0] = root.val;
+        revInorder(root.left, sum);
+    }
+    public TreeNode bstToGst(TreeNode root) {
+        int[] sum = new int[1];
+        revInorder(root, sum);
+        return root;        
+    }
+}
