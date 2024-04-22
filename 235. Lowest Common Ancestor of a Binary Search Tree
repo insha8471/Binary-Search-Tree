@@ -1,5 +1,5 @@
 235. Lowest Common Ancestor of a Binary Search Tree
-//Time complexity O(n)...
+//Time complexity O(n)
 //S.c : O(h)
 
 
